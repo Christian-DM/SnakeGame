@@ -1,6 +1,7 @@
 import pygame
 import random
 
+
 from code.Background import window, clock
 from code.Const import width, SQUARE_SIZE, height, C_GREEN, C_WHITE, C_RED, C_BLACK, GAME_SPEED
 
@@ -47,6 +48,11 @@ def select_speed(key):
 
 
 def run_game():
+    pygame.mixer_music.load(f'./asset/forest.crdownload')
+    pygame.mixer_music.set_volume(0.3)
+    pygame.mixer_music.play(-1)
+
+
     end_game = False
 
     x = width / 2
@@ -63,6 +69,7 @@ def run_game():
     # rodar loop infinito
     while not end_game:
         window.fill(C_BLACK)
+
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
