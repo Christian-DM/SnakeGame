@@ -7,7 +7,8 @@ from code.Const import width, SQUARE_SIZE, height, C_GREEN, C_WHITE, C_RED, C_BL
 
 
 class Game:
-    pass
+    def run(self):
+        pass
 
 
 def spawn_food():  # gera comida
@@ -66,7 +67,6 @@ def run_game():
 
     food_x, food_y = spawn_food()
 
-    # rodar loop infinito
     while not end_game:
         window.fill(C_BLACK)
 
@@ -77,33 +77,31 @@ def run_game():
             elif event.type == pygame.KEYDOWN:
                 speed_x, speed_y = select_speed(event.key)
 
-        # desenhar_comida
         draw_food(SQUARE_SIZE, food_x, food_y)
 
-        # atualizar cobra
         if x < 0 or x >= width or y < 0 or y >= height:
             end_game = True
 
         x += speed_x
         y += speed_y
-        # desenhar_cobra
+
         pixels.append([x, y])
         if len(pixels) > snake_size:
             del pixels[0]
-        # se a cobrinha bater no na cobrinha
+
         for pixel in pixels[:-1]:
             if pixel == [x, y]:
                 end_game = True
 
         draw_snake(SQUARE_SIZE, pixels)
 
-        # desenhar_pontos
+
         draw_score(snake_size - 1)
 
-        # atualização da tela
+
         pygame.display.update()
 
-        # criar uma nova comida
+
         if x == food_x and y == food_y:
             snake_size += 1
             food_x, food_y = spawn_food()
